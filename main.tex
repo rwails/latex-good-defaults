@@ -1,0 +1,80 @@
+\documentclass[11pt, letterpaper, twocolumn]{article}
+
+% Font, input encoding, language setup. fontenc should come before inputenc
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[american]{babel}
+\usepackage{csquotes, xpatch} % Babel/biblatex wants these
+\usepackage{microtype}
+\microtypecontext{spacing=nonfrench}
+
+% Bibliography management w/ biblatex
+% Cheat sheet:
+% <https://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf>
+\usepackage[backend=biber,sorting=nyt,style=ieee]{biblatex}
+\bibliography{example}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts} % Standard math packages
+\usepackage{balance} % Balance the references in the bibliography
+\usepackage{booktabs} % Good table defaults
+\usepackage{caption} % Flexible caption commands
+\usepackage{color} % Colors
+\usepackage{doi} % Allows DOI values to appear in the bib and be automatically linked to.
+\usepackage{float} % Flexible float commands
+\usepackage{graphicx} % Include images
+\usepackage{hyperref} % Clickable links in the paper
+
+% Enables the \num command which nicely formats numbers.
+\usepackage[]{siunitx}
+\sisetup{detect-all, group-separator={,}, group-minimum-digits=3}
+
+\usepackage{xcolor} % Colors
+\usepackage{xfrac} % Pretty fraction formatting with the sfrac command
+\usepackage{xspace} % Useful for macros
+\usepackage{xurl} % Allow URLs to be broken across lines
+
+\newcommand{\mytitle}{\LaTeX{} Good Defaults}
+\title{\mytitle}
+\author{Me}
+
+\hypersetup{
+     colorlinks=true,
+     linkcolor=black,
+     citecolor=black,
+     filecolor=black,
+     urlcolor=black,
+     pdfauthor = {}, % Fill in
+     pdftitle = {\mytitle},
+     pdfkeywords = {} % Fill in
+}
+
+\begin{document}
+  \maketitle
+
+  A pretty fraction: \sfrac{1}{2}
+
+  A pretty number: \num{123456}.
+
+  \begin{table}[t]
+    \centering
+    \caption{My pretty table.}
+    \label{tab:pretty}
+    \begin{tabular}{ll}
+      \toprule
+      A & B \\
+      \midrule
+      1 & 2 \\
+      3 & 4 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  A pretty table: Table~\ref{tab:pretty}.
+
+  Some citations:
+  Knuth~\cite{knuth-taocp-v1}, Blaze~\cite{blaze-cfs},
+  Wikipedia~\cite{bhattacharyya}.
+
+  \balance
+  \printbibliography
+\end{document}
