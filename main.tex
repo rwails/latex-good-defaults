@@ -11,18 +11,40 @@
 % Bibliography management w/ biblatex
 % Cheat sheet:
 % <https://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf>
-\usepackage[backend=biber,sorting=nyt,style=ieee]{biblatex}
+% Name-year sorting is a good choice, but you can set to "none" to get
+% citation-order sorting.
+% mincrossrefs=1000 squelches a warning.
+\usepackage[
+  backend=biber,
+  sorting=nyt,
+  style=ieee,
+  mincrossrefs=1000,
+  minnames=10,
+  maxnames=10]{biblatex}
+
+% This snippet just changes the auto-generated et al. string to not be in
+% italics. If that's your preference, remove the snippet.
+\DefineBibliographyStrings{english}{
+    andothers = {et\addabbrvspace al\adddot}
+}
+
 \bibliography{example}
 
-\usepackage{amsmath, amsthm, amssymb, amsfonts} % Standard math packages
+% Optional
+% \usepackage{stix} % Standard fonts for scientific publishing, similar to TNR
+% \usepackage{tikz} % For creating nice figures
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts, bbm, bm} % Standard math packages
+\usepackage{algpseudocode,algorithm,algorithmicx} % Creating pretty algorithm listings
 \usepackage{balance} % Balance the references in the bibliography
 \usepackage{booktabs} % Good table defaults
 \usepackage{caption} % Flexible caption commands
 \usepackage{color} % Colors
 \usepackage{doi} % Allows DOI values to appear in the bib and be automatically linked to.
-\usepackage{float} % Flexible float commands
+\usepackage{enumitem} % Tighter contol over laying out lists
 \usepackage{graphicx} % Include images
 \usepackage{hyperref} % Clickable links in the paper
+\usepackage{multicol, multirow, tabularx} % More control over tables
 
 % Enables the \num command which nicely formats numbers.
 \usepackage[]{siunitx}
@@ -48,32 +70,21 @@
      pdfkeywords = {} % Fill in
 }
 
+\DeclareMathOperator{\aes}{aes256}
+
 \begin{document}
+  % Controls the behavior of autoref. These need to live inside the
+  % \begin{document}
+  \renewcommand{\tableautorefname}{Table}
+  \renewcommand{\figureautorefname}{Fig.}
+  \renewcommand{\equationautorefname}{Eqn.}
+  \renewcommand{\sectionautorefname}{\S\kern-3pt}
+  \renewcommand{\subsectionautorefname}{\S\kern-3pt}
+  \renewcommand{\subsubsectionautorefname}{\S\kern-3pt}
+
   \maketitle
 
-  A pretty fraction: \sfrac{1}{2}
-
-  A pretty number: \num{123456}.
-
-  \begin{table}[t]
-    \centering
-    \caption{My pretty table.}
-    \label{tab:pretty}
-    \begin{tabular}{ll}
-      \toprule
-      A & B \\
-      \midrule
-      1 & 2 \\
-      3 & 4 \\
-      \bottomrule
-    \end{tabular}
-  \end{table}
-
-  A pretty table: Table~\ref{tab:pretty}.
-
-  Some citations:
-  Knuth~\cite{knuth-taocp-v1}, Blaze~\cite{blaze-cfs},
-  Wikipedia~\cite{bhattacharyya}.
+  \input{example}
 
   \balance
   \printbibliography
